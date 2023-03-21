@@ -1,0 +1,42 @@
+<div class="page selecto-area" style="aspect-ratio: 3 / 4; background-color: lightgray;">
+  <div #pl *ngFor="let pl of imagePlaceholders">
+    <app-placeholder #pl [id]="pl.id" class="pl position-absolute" [url]="pl.src"
+      [ngStyle]="{'width.px':pl.width, 'height.px': pl.height, 'top.px': pl.top, 'left.px': pl.left}">
+    </app-placeholder>
+  </div>
+
+  <div [id]="pl.id" #pl class="pl position-absolute" *ngFor="let pl of textPlaceholders" [ngStyle]="{'width.px':pl.width, 'height.px': pl.height, 'top.px': pl.top, 'left.px': pl.left, 
+    'font-family': pl.fontStyle, 'font-size.rem': pl.fontSize, 'line-height.rem': pl.fontSize}">
+    <span contenteditable="true"(keyup)="onKeyUp()">
+      {{pl.text}}
+    </span>
+  </div>
+</div>
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" [value]="true" [(ngModel)]="isScalable" autocomplete="off"> Scaling
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option2" [value]="false" [(ngModel)]="isScalable" autocomplete="off">
+    Resizing
+  </label>
+</div>
+
+<ngx-selecto #selecto dragContainer=".page" [selectableTargets]='[".selecto-area .pl"]' [hitRate]='0'
+  [selectByClick]='true' [selectFromInside]='false' [toggleContinueSelect]='["shift"]' [ratio]='0'
+  (dragStart)="onDragStart($event)" (select)="onSelect($event)" (selectEnd)="onSelectEnd($event)"></ngx-selecto>
+
+<ngx-moveable #moveable [draggable]='true' [resizable]='!isScalable' [scalable]='isScalable' [rotatable]='true'
+  [target]='selectedElements' [keepRatio]='isScalable' [throttleResize]='1'
+  [renderDirections]='["nw","n","ne","w","e","sw","s","se"]' [edge]='false' [zoom]='1' [origin]='true'
+  [padding]='{"left":0,"top":0,"right":0,"bottom":0}' [throttleRotate]='0' [rotationPosition]='"top"'
+  [elementGuidelines]="elementGuidelines" [snappable]='true' [verticalGuidelines]='[0,200,200]' [horizontalGuidelines]='[0,200,200]'
+  [snapThreshold]='5' [isDisplaySnapDigit]='true' [snapGap]='true'
+  [snapDirections]='{"top":true,"right":true,"bottom":true,"left":true}'
+  [elementSnapDirections]='{"top":true,"right":true,"bottom":true,"left":true}' [snapDigit]='0'
+  (resizeStart)="onSinglePlaceholderActionStart($event, actionType.Resize)" (resize)="onSinglePlaceholderAction($event, actionType.Resize)" (rotateStart)="onSinglePlaceholderActionStart($event, actionType.Rotate)"
+  (rotate)="onSinglePlaceholderAction($event, actionType.Rotate)" (clickGroup)="onClickGroup($event)" (drag)="onDrag($event)" (scaleGroup)="onScaleGroup($event)" (scaleStart)="onSinglePlaceholderActionStart($event, actionType.Scale)" (scale)="onSinglePlaceholderAction($event, actionType.Scale)"
+  (dragGroup)="onDragGroup($event)" (resizeGroupStart)="onResizeGroupStart($event)"
+  (resizeGroup)="onResizeGroup($event)" (rotateGroupStart)="onRotateGroupStart($event)"
+  (rotateGroup)="onRotateGroup($event)" (scaleGroupStart)="onScaleGroupStart($event)"  >
+</ngx-moveable>
