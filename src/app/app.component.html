@@ -1,4 +1,4 @@
-<div class="page selecto-area" style="aspect-ratio: 3 / 4; background-color: lightgray;">
+<div class="page selecto-area" style="aspect-ratio: 3 / 4; background-color: white; border: 0.25rem #6c757d solid;">
   <div #pl *ngFor="let pl of imagePlaceholders">
     <app-placeholder #pl [id]="pl.id" class="pl position-absolute" [url]="pl.src"
       [ngStyle]="{'width.px':pl.width, 'height.px': pl.height, 'top.px': pl.top, 'left.px': pl.left}">
@@ -13,10 +13,10 @@
   </div>
 </div>
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active">
+  <label class="btn btn-outline-secondary active">
     <input type="radio" name="options" id="option1" [value]="true" [(ngModel)]="isScalable" autocomplete="off"> Scaling
   </label>
-  <label class="btn btn-secondary">
+  <label class="btn btn-outline-secondary">
     <input type="radio" name="options" id="option2" [value]="false" [(ngModel)]="isScalable" autocomplete="off">
     Resizing
   </label>
