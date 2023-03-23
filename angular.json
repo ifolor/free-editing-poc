@@ -106,7 +106,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "https://github.com/ifolor/free-editing.git"
+            "baseHref": "https://ifolor.github.io/free-editing/"
           }
         }
       }
